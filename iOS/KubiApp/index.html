@@ -1,0 +1,33 @@
+<html>
+<head>
+<meta name="viewport" content="user-scalable=no, width=device-width"/>
+<meta http-equiv="refresh" content="2">
+<title>%@</title>
+<style type="text/css">
+    td {text-align:center;}
+</style>
+</head>
+<body style="font-family:Helvetica;">
+    <h1>%@</h1>
+    <h2>%@</h2>
+    <table>
+        <tr>
+            <td><form action="/recenter" method="post"><input type="submit" value="Recenter"/></form></td>
+            <td><form action="/up" method="post"><input type="submit" value="Move Up"/></form></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><form action="/left" method="post"><input type="submit" value="Move Left"/></form></td>
+            <td><form>(%d, %d)</form></td>
+            <td><form action="/right" method="post"><input type="submit" value="Move Right"/></form></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><form action="/down" method="post"><input type="submit" value="Move Down"/></form></td>
+            <td></td>
+        </tr>
+    </table>
+    <br/>
+    <a href="/">Reload</a>
+</body>
+</html>

@@ -1,0 +1,10 @@
+
+Kubi Sample Application
+
+This demo application connects to and controls a nearby Kubi 
+using Apple's CoreBluetooth framework. The Kubi is controlled
+with on screen buttons. Place an iPad in the Kubi and run this
+on a handheld iPhone, iPod, or iPad to control the Kubi's 
+orientation.
+
+Copyright 2013, Revolve Robotics, Inc.
