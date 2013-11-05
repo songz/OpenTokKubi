@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1FF3CAD5-C5F2-4EAB-8B10-00B31BD2299F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>KubiApp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>A040CB0E-1234-42FD-9886-8F560C1BA9B4</key>
+		<string>ssh://github.com/opentok/kubi.git</string>
+		<key>E6C5F7F0-3FC4-4D2B-A3C9-E401F4409A5F</key>
+		<string>https://github.com/opentok/opentok-ios-sdk-webrtc</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>KubiApp.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>A040CB0E-1234-42FD-9886-8F560C1BA9B4</key>
+		<string>../..</string>
+		<key>E6C5F7F0-3FC4-4D2B-A3C9-E401F4409A5F</key>
+		<string>../../opentok-ios-sdk-webrtc</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/opentok/kubi.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>A040CB0E-1234-42FD-9886-8F560C1BA9B4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A040CB0E-1234-42FD-9886-8F560C1BA9B4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iOS</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E6C5F7F0-3FC4-4D2B-A3C9-E401F4409A5F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>opentok-ios-sdk-webrtc</string>
+		</dict>
+	</array>
+</dict>
+</plist>

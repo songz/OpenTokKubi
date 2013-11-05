@@ -8,6 +8,7 @@
 #import "AppDelegate.h"
 #import "ServiceViewController.h"
 #import "ScanViewController.h"
+#import "RoomViewController.h"
 
 #define DISCONNECTED_BACKGROUND_COLOR [UIColor grayColor]
 #define CONNECTED_BACKGROUND_COLOR [UIColor colorWithRed:248/255.0 green:54/255.0 blue:36/255.0 alpha:1]
@@ -33,18 +34,13 @@
 
 @property (nonatomic, strong) UIButton *actionButton;
 
-@property (nonatomic, strong) UIView *buttonPad;
-@property (nonatomic, strong) UIButton *upButton;
-@property (nonatomic, strong) UIButton *downButton;
-@property (nonatomic, strong) UIButton *leftButton;
-@property (nonatomic, strong) UIButton *rightButton;
-@property (nonatomic, strong) UIButton *recenterButton;
-@property (nonatomic, strong) UILabel *positionLabel;
+@property (nonatomic, strong) UIButton *roomButton;
 @property (nonatomic, strong) UISlider *stepSlider;
 @property (nonatomic, strong) UILabel *stepLabel;
 @property (nonatomic, strong) UISlider *speedSlider;
 @property (nonatomic, strong) UILabel *speedLabel;
 @property (nonatomic, strong) UILabel *deviceNameLabel;
+@property (nonatomic, strong) UILabel *roomNameLabel;
 @property (nonatomic, strong) UIAlertView *connectionAlertView;
 
 @property (nonatomic, strong) NSMutableSet *canceledPeripherals;
@@ -70,7 +66,15 @@
 
 @end
 
-@implementation ServiceViewController
+@implementation ServiceViewController{
+    OTSession* _session;
+    OTPublisher* _publisher;
+    OTSubscriber* _subscriber;
+    NSString* _apiKey;
+    NSString* _sid;
+    NSString* _token;
+    NSMutableDictionary *subscriberDictionary;
+}
 
 - (id) init {
     if (self = [super init]) {
@@ -78,7 +82,7 @@
         self.discoveryRSSIs = [NSMutableDictionary dictionary];
         self.manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         self.canceledPeripherals = [NSMutableSet set];
-        self.deviceName = @"Disconnected";
+        self.deviceName = @"Kubi Not Connected";
         self.stepSize = 10;
         self.speed = 60;
     }
@@ -92,6 +96,8 @@
 #define PAD_HEIGHT 210
 #define PAD_WIDTH 300
 
+#define KUBI_BUTTON @"Connect Kubi"
+
 - (void) updateStepText
 {
     self.stepLabel.text = [NSString stringWithFormat:@"Step: %d", self.stepSize];
@@ -104,7 +110,6 @@
 
 - (void) hideAccessories:(BOOL) hidden
 {
-    self.buttonPad.hidden = hidden;
     self.stepLabel.hidden = hidden;
     self.stepSlider.hidden = hidden;
     self.speedLabel.hidden = hidden;
@@ -115,14 +120,6 @@
 {
     [super loadView];
     self.view.backgroundColor = DISCONNECTED_BACKGROUND_COLOR;
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d-pad-wireframe_02.png"]];
-    imageView.transform = CGAffineTransformMakeRotation(M_PI);
-    CGRect imageFrame = imageView.frame;
-    imageFrame.origin.x = self.view.bounds.size.width - imageFrame.size.width;
-    imageView.frame = imageFrame;
-    imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin+UIViewAutoresizingFlexibleBottomMargin;
-    [self.view addSubview:imageView];
     
     self.stepSlider = [[UISlider alloc] initWithFrame:CGRectMake(0,0,300,20)];
     self.stepSlider.transform = CGAffineTransformMakeRotation(-M_PI*0.5);
@@ -155,70 +152,38 @@
     self.speedLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:self.speedLabel];
     [self updateSpeedText];
-        
-    CGFloat sideMargin = 0.5*(self.view.bounds.size.width - PAD_WIDTH);
-    CGFloat topMargin = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) ? 100 : 100;
     
-    self.buttonPad = [[UIView alloc] initWithFrame:CGRectMake(sideMargin, topMargin, PAD_WIDTH, PAD_HEIGHT)];
-    [self.view addSubview:self.buttonPad];
-    self.buttonPad.backgroundColor = [UIColor darkGrayColor];
-    self.buttonPad.layer.cornerRadius = 10;
-    self.buttonPad.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin+UIViewAutoresizingFlexibleLeftMargin+UIViewAutoresizingFlexibleRightMargin;
+    [self createPublisher];
+    subscriberDictionary = [[NSMutableDictionary alloc] init];
     
-    self.upButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.upButton setTitle:@"Up" forState:UIControlStateNormal];
-    [self.upButton addTarget:self action:@selector(moveUp:) forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonPad addSubview:self.upButton];
+    self.roomButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.roomButton setTitle:@"Choose Room" forState:UIControlStateNormal];
+    [self.roomButton addTarget:self action:@selector(roomButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    CGRect actionButtonFrame = self.view.bounds;
+    actionButtonFrame.origin.x = 80;
+    actionButtonFrame.origin.y = actionButtonFrame.size.height - VERTICAL_MARGIN - BUTTON_HEIGHT;
+    actionButtonFrame.size.width = BUTTON_WIDTH;
+    actionButtonFrame.size.height = BUTTON_HEIGHT;
+    self.roomButton.frame = actionButtonFrame;
+    self.roomButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin + UIViewAutoresizingFlexibleLeftMargin + UIViewAutoresizingFlexibleRightMargin;
+    [self.view insertSubview:self.roomButton atIndex:11];
     
-    self.downButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.downButton setTitle:@"Down" forState:UIControlStateNormal];
-    [self.downButton addTarget:self action:@selector(moveDown:) forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonPad addSubview:self.downButton];
-    
-    self.leftButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.leftButton setTitle:@"Left" forState:UIControlStateNormal];
-    [self.leftButton addTarget:self action:@selector(moveLeft:) forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonPad addSubview:self.leftButton];
-    
-    self.rightButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.rightButton setTitle:@"Right" forState:UIControlStateNormal];
-    [self.rightButton addTarget:self action:@selector(moveRight:) forControlEvents:UIControlEventTouchUpInside];
-    [self.buttonPad addSubview:self.rightButton];
-    
-    self.upButton.frame = CGRectMake(110, 10,80, 50);
-    self.leftButton.frame = CGRectMake(10, 80, 80, 50);
-    self.rightButton.frame = CGRectMake(210, 80, 80, 50);
-    self.downButton.frame = CGRectMake(110,150,80,50);
-    
-    self.recenterButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.recenterButton setTitle:@"Recenter" forState:UIControlStateNormal];
-    [self.recenterButton addTarget:self action:@selector(recenter:) forControlEvents:UIControlEventTouchUpInside];
-    self.recenterButton.frame = CGRectMake(10,10,80,50);
-    [self.buttonPad addSubview:self.recenterButton];
-    
-    self.positionLabel = [[UILabel alloc] initWithFrame:CGRectMake(100,70,100,70)];
-    self.positionLabel.backgroundColor = [UIColor whiteColor];
-    self.positionLabel.text = @"---,---";
-    self.positionLabel.textAlignment = UITextAlignmentCenter;
-    self.positionLabel.layer.cornerRadius = 10;
-    [self.buttonPad addSubview:self.positionLabel];
-    
-    [self hideAccessories:YES];
     
     self.actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [self.actionButton setTitle:@"Scan" forState:UIControlStateNormal];
+    [self.actionButton setTitle:KUBI_BUTTON forState:UIControlStateNormal];
     [self.actionButton addTarget:self action:@selector(actionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    CGRect actionButtonFrame = self.view.bounds;
-    actionButtonFrame.origin.x = (actionButtonFrame.size.width - BUTTON_WIDTH) * 0.5;
-    actionButtonFrame.origin.y = actionButtonFrame.size.height - VERTICAL_MARGIN - BUTTON_HEIGHT;
+    actionButtonFrame = self.view.bounds;
+    actionButtonFrame.origin.x = 80;
+    actionButtonFrame.origin.y = actionButtonFrame.size.height - VERTICAL_MARGIN*2 - BUTTON_HEIGHT*2;
     actionButtonFrame.size.width = BUTTON_WIDTH;
     actionButtonFrame.size.height = BUTTON_HEIGHT;
     self.actionButton.frame = actionButtonFrame;
     self.actionButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin + UIViewAutoresizingFlexibleLeftMargin + UIViewAutoresizingFlexibleRightMargin;
-    [self.view addSubview:self.actionButton];
+    [self.view insertSubview:self.actionButton atIndex:10];
     
-    CGRect deviceNameLabelFrame = CGRectMake(0.5*(self.view.bounds.size.width - LABEL_WIDTH),
-                                             actionButtonFrame.origin.y - LABEL_HEIGHT - VERTICAL_MARGIN,
+    
+    CGRect deviceNameLabelFrame = CGRectMake(0,
+                                             actionButtonFrame.origin.y - LABEL_HEIGHT,
                                              LABEL_WIDTH,
                                              LABEL_HEIGHT);
     
@@ -229,8 +194,242 @@
     self.deviceNameLabel.backgroundColor = [UIColor clearColor];
     self.deviceNameLabel.textColor = [UIColor whiteColor];
     self.deviceNameLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin + UIViewAutoresizingFlexibleLeftMargin + UIViewAutoresizingFlexibleRightMargin;
-    [self.view addSubview:self.deviceNameLabel];
+    [self.view insertSubview:self.deviceNameLabel atIndex: 10];
     
+    CGRect roomNameLabelFrame = CGRectMake(0.5*(self.view.bounds.size.width - LABEL_WIDTH),
+                                             LABEL_HEIGHT - VERTICAL_MARGIN,
+                                             LABEL_WIDTH,
+                                             LABEL_HEIGHT);
+    self.roomNameLabel = [[UILabel alloc] initWithFrame:roomNameLabelFrame];
+    self.roomNameLabel.text = @"Please select a room";
+    self.roomNameLabel.textAlignment = UITextAlignmentCenter;
+    self.roomNameLabel.font = [UIFont boldSystemFontOfSize:24];
+    self.roomNameLabel.backgroundColor = [UIColor clearColor];
+    self.roomNameLabel.textColor = [UIColor whiteColor];
+    self.roomNameLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin + UIViewAutoresizingFlexibleLeftMargin + UIViewAutoresizingFlexibleRightMargin;
+    [self.view insertSubview:self.roomNameLabel atIndex: 10];
+    
+    [self hideAccessories:YES];
+}
+
+- (void) createPublisher{
+    CGRect screen = [[UIScreen mainScreen] bounds];
+    CGFloat width = CGRectGetWidth(screen);
+    CGFloat height = CGRectGetHeight(screen);
+    
+    _publisher = [[OTPublisher alloc] initWithDelegate:self];
+    [_publisher.view setFrame:CGRectMake(width-240, height-255, 240, 240)];
+
+    CGPoint saveCenter = _publisher.view.center;
+    CGRect newFrame = CGRectMake(width-240, height-240, 240, 240);
+    _publisher.view.frame = newFrame;
+    _publisher.view.layer.cornerRadius = 240 / 2.0;
+    _publisher.view.center = saveCenter;
+    [self.view insertSubview:_publisher.view atIndex:5];
+}
+
+- (void)setupSession{
+    NSLog(@" SETTING UP SESSION");
+    NSLog(@" api key: %@", _apiKey);
+    NSLog(@" session: %@", _sid);
+    NSLog(@" token: %@", _token);
+    if (_apiKey && _sid && _token) {
+        _session = [[OTSession alloc] initWithSessionId:_sid delegate:self];
+        [_session connectWithApiKey:_apiKey token:_token];
+        _apiKey = NULL;
+        _sid = NULL;
+        _token = NULL;
+    }
+}
+
+- (void)joinNewSession:(NSString *)apiKey withSession:(NSString *)sid withRoomName:(NSString *)roomName andToken:(NSString *)token{
+
+    NSLog(@" api key: %@", apiKey);
+    NSLog(@" session: %@", sid);
+    NSLog(@" token: %@", token);
+
+    _apiKey = [[NSString alloc] initWithString:apiKey];
+    _sid = [[NSString alloc] initWithString:sid];
+    _token = [[NSString alloc] initWithString:token];
+    
+    self.roomNameLabel.text = roomName;
+    
+    if (_session) {
+        [_session disconnect];
+        return;
+    }
+    
+    [self setupSession];
+}
+
+- (void)updateStreamsView{
+    
+    CGRect screen = [[UIScreen mainScreen] bounds];
+    double containerStreamsWidth = CGRectGetWidth(screen);
+    double containerStreamsHeight = CGRectGetHeight(screen) - 240;
+    double xStreams = 5;
+    double yStreams = 20;
+    
+    int margin = 10;
+    int centerx = 0;
+    int centery = 0;
+    
+    double videoCount = [subscriberDictionary count];
+    double rows = 1.0;
+    double cols = ceil(videoCount/rows);
+    double eWidth = containerStreamsWidth/cols;
+    double eHeight = eWidth*(3.0/4.0);
+    
+    while (rows*eHeight < containerStreamsHeight) {
+        if (cols==1) {
+            break;
+        }
+        rows += 1;
+        cols = ceil( videoCount/rows);
+        double nWidth = containerStreamsWidth/cols;
+        double nHeight = (nWidth/4.0)*3.0;
+        
+        double testHeight = containerStreamsHeight/rows;
+        double testWidth = floor( testHeight*4.0/3.0 );
+        
+        NSLog(@"%f", (nHeight));
+        
+        if (nHeight > testHeight && (rows*nHeight) > containerStreamsHeight) {
+            nHeight = testHeight;
+            nWidth = testWidth;
+        }
+        
+        if(nWidth < eWidth || rows*nHeight > containerStreamsHeight){
+            rows -= 1;
+            cols = ceil( videoCount/rows);
+            break;
+        }
+        eWidth = nWidth;
+        eHeight = nHeight;
+    }
+    if (eHeight*rows > containerStreamsHeight) {
+        eWidth = (containerStreamsHeight/rows)*(4/3);
+    }
+    eWidth -= 10;
+    
+    int iRow = 0;
+    int iCol = 0;
+    int index = 0;
+    
+    eHeight = eWidth*(3.0/4.0);
+    centery = ( containerStreamsHeight - rows*(eHeight+margin) )/2.0;
+    if (centery< 0) {
+        centery=0;
+    }
+    
+    for(id key in subscriberDictionary){
+        index ++;
+        if ( iCol == 0 ) {
+            if ( (videoCount - (iRow)*cols) <= cols ) {
+                centerx = (containerStreamsWidth - (videoCount - (iRow)*cols)*(eWidth+margin) )/2.0;
+            }else{
+                centerx = (containerStreamsWidth - cols*(eWidth+margin) )/2.0;
+            }
+        }
+        OTSubscriber* eSubscriber = [subscriberDictionary objectForKey:key];
+        eSubscriber.view.frame = CGRectMake( xStreams+(eWidth+margin)*iCol + centerx, yStreams+(eHeight+margin)*iRow + centery, eWidth, (eWidth*(3.0/4.0)));
+        iCol += 1;
+        if (iCol>=cols) {
+            iCol = 0;
+            iRow += 1;
+        }
+    }
+}
+
+- (void)session:(OTSession*)session didFailWithError:(OTError*)error {
+    NSLog(@"sessionDidFail");
+    NSLog(@"%@", error);
+    [self showAlert:[NSString stringWithFormat:@"There was an error connecting to session %@", session.sessionId]];
+}
+- (void)showAlert:(NSString*)string {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Message from video session"
+                                                    message:string
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
+- (void)sessionDidConnect:(OTSession*)session
+{
+    NSLog(@"sessionDidConnect (%@)", session.sessionId);
+    [_session publish:_publisher];
+    [_session receiveSignalType:@"x" withHandler:^(NSString *type, id data, OTConnection *fromConnection){
+        
+        int command = [(NSString* )data intValue];
+        self.xPosition = command;
+        NSLog(@"new position: %d", self.xPosition);
+        if (self.xPosition > 100) {
+            self.xPosition = 100;
+        }
+        NSLog(@"x signal");
+        [self moveToCurrentPosition];
+    }];
+    [_session receiveSignalType:@"y" withHandler:^(NSString *type, id data, OTConnection *fromConnection){
+        
+        int command = [(NSString* )data intValue];
+        self.yPosition = command;
+        NSLog(@"new position: %d", self.yPosition);
+        if (self.yPosition > 100) {
+            self.yPosition = 100;
+        }
+        NSLog(@"y signal");
+        [self moveToCurrentPosition];
+    }];
+
+    
+    
+}
+
+- (void)session:(OTSession*)mySession didReceiveStream:(OTStream*)stream
+{
+    NSLog(@"session didReceiveStream (%@)", stream.streamId);
+    
+    // See the declaration of subscribeToSelf above.
+    if (![stream.connection.connectionId isEqualToString: _session.connection.connectionId] && [subscriberDictionary count] < 2){
+        OTSubscriber* newSubscriber = [[OTSubscriber alloc] initWithStream:stream delegate:self];
+        [subscriberDictionary setObject:newSubscriber forKey:stream.streamId];
+        [self.view insertSubview:newSubscriber.view atIndex:4];
+    }
+    [self updateStreamsView];
+}
+- (void)subscriberDidConnectToStream:(OTSubscriber*)subscriber
+{
+    NSLog(@"subscriberDidConnectToStream (%@)", subscriber.stream.connection.connectionId);
+    
+}
+
+- (void)sessionDidDisconnect:(OTSession *)session{
+    _session = NULL;
+    [self createPublisher];
+    [self setupSession];
+}
+
+- (void)session:(OTSession*)session didDropStream:(OTStream*)stream{
+    NSLog(@"session didDropStream (%@)", stream.streamId);
+    
+    if ([subscriberDictionary objectForKey:stream.streamId])
+    {
+        [subscriberDictionary removeObjectForKey:stream.streamId];
+    }
+    [self updateStreamsView];
+}
+
+- (void)subscriber:(OTSubscriber*)subscriber didFailWithError:(OTError*)error
+{
+    NSLog(@"subscriber %@ didFailWithError %@", subscriber.stream.streamId, error);
+    [self showAlert:[NSString stringWithFormat:@"There was an error subscribing to stream %@", subscriber.stream.streamId]];
+    
+    if ([subscriberDictionary objectForKey:subscriber.stream.streamId])
+    {
+        [subscriberDictionary removeObjectForKey:subscriber.stream.streamId];
+    }
+    [self updateStreamsView];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -255,9 +454,24 @@
     [self updateSpeed];
 }
 
+- (void) roomButtonPressed:(UIButton *) sender{
+    if ([sender.currentTitle isEqualToString:@"Choose Room"]) {
+        self.roomViewController = [[RoomViewController alloc] init];
+        self.roomViewController.serviceViewController = self;
+        UINavigationController *scanViewNavigationController = [[UINavigationController alloc]
+                                                                initWithRootViewController:self.roomViewController];
+        scanViewNavigationController.navigationBar.tintColor = CONNECTED_BACKGROUND_COLOR;
+        scanViewNavigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+        
+        [self presentModalViewController:scanViewNavigationController animated:YES];
+    } else if ([sender.currentTitle isEqualToString:@"Leave Room"]) {
+        [sender setTitle:@"Choose Room" forState:UIControlStateNormal];
+    }
+}
+
 - (void) actionButtonPressed:(UIButton *) sender
 {
-    if ([sender.currentTitle isEqualToString:@"Scan"]) {
+    if ([sender.currentTitle isEqualToString:KUBI_BUTTON]) {
         self.scanViewController = [[ScanViewController alloc] init];
         self.scanViewController.serviceViewController = self;
         UINavigationController *scanViewNavigationController = [[UINavigationController alloc]
@@ -322,8 +536,6 @@ static void swap_bytes(short *value) {
 #define MAX_HORIZONTAL 818
 
 - (void) moveToCurrentPosition {
-    self.positionLabel.text = [NSString stringWithFormat:@"(%03d,%03d)", self.xPosition, self.yPosition];
-    
     short vertical = (MAX_VERTICAL - MIN_VERTICAL) * (-self.yPosition + 100) / 200.0 + MIN_VERTICAL;
     short horizontal = (MAX_HORIZONTAL - MIN_HORIZONTAL) * (-self.xPosition + 100) / 200.0 + MIN_HORIZONTAL;
                 
@@ -349,43 +561,6 @@ static void swap_bytes(short *value) {
     [self moveToCurrentPosition];
 }
 
-- (void) recenter:(id) sender {
-    self.xPosition = 0;
-    self.yPosition = 0;
-    [self moveToCurrentPosition];
-}
-
-- (void) moveUp:(id) sender {
-    self.yPosition += self.stepSize;
-    if (self.yPosition > 100) {
-        self.yPosition = 100;
-    }
-    [self moveToCurrentPosition];
-}
-
-- (void) moveDown:(id) sender {
-    self.yPosition -= self.stepSize;
-    if (self.yPosition < -100) {
-        self.yPosition = -100;
-    }
-    [self moveToCurrentPosition];
-}
-
-- (void) moveLeft:(id) sender {
-    self.xPosition -= self.stepSize;
-    if (self.xPosition < -100) {
-        self.xPosition = -100;
-    }
-    [self moveToCurrentPosition];
-}
-
-- (void) moveRight:(id) sender {
-    self.xPosition += self.stepSize;
-    if (self.xPosition > 100) {
-        self.xPosition = 100;
-    }
-    [self moveToCurrentPosition];
-}
 
 #pragma mark - Start/Stop Scan methods
 
@@ -536,7 +711,6 @@ static void swap_bytes(short *value) {
     }
     self.deviceName = name;
     self.deviceNameLabel.text = self.deviceName;
-    [self hideAccessories:NO];
     self.peripheral = peripheral;
     [peripheral setDelegate:self];
     [self clearAllServicesAndCharacteristics];
@@ -554,7 +728,7 @@ didDisconnectPeripheral:(CBPeripheral *)aPeripheral
         self.peripheral = nil;
     }
     [self clearAllServicesAndCharacteristics];
-    self.deviceName = @"Disconnected";
+    self.deviceName = @"Kubi Not Connected";
     self.deviceNameLabel.text = self.deviceName;
     [self hideAccessories:YES];
     [self.actionButton setTitle:@"Scan" forState:UIControlStateNormal];
@@ -665,6 +839,10 @@ didFailToConnectPeripheral:(CBPeripheral *)aPeripheral
                 self.servoRegisterToMonitorCharacteristic &&
                 self.servoRegisterMonitoredValueCharacteristic) {
                 self.view.backgroundColor = CONNECTED_BACKGROUND_COLOR;
+                
+                
+                
+                
                 [self updateSpeed];
             }
             [self.peripheral discoverDescriptorsForCharacteristic:characteristic];
@@ -707,8 +885,10 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
 - (void)peripheral:(CBPeripheral *)peripheral
 didWriteValueForCharacteristic:(CBCharacteristic *)characteristic
              error:(NSError *)error {
-    
-    NSLog(@"didWriteValueWithError:%@", [error description]);
+    if (error) {
+            NSLog(@"didWriteValueWithError:%@", [error description]);
+    }
+
     
 }
 

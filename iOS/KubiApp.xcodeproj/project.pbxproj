@@ -10,9 +10,6 @@
 		220B2DC615DC446E006F8E44 /* ServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 220B2DC515DC446E006F8E44 /* ServiceViewController.m */; };
 		221CEA8A160EACD70043B023 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 221CEA89160EACD70043B023 /* Default-568h@2x.png */; };
 		2250D240160C10240057CD21 /* ScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2250D23F160C10240057CD21 /* ScanViewController.m */; };
-		22B6EDC516CD988200FCFFC1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6EDC416CD988200FCFFC1 /* CoreBluetooth.framework */; };
-		22B6EDC716CD989900FCFFC1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6EDC616CD989900FCFFC1 /* UIKit.framework */; };
-		22B6EDC916CD992700FCFFC1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B6EDC816CD992700FCFFC1 /* CoreGraphics.framework */; };
 		22DB66E6151102B300BEE9D5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22EED42C14F854C300D83F04 /* Foundation.framework */; };
 		22DB66EE151102B300BEE9D5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22DB66EC151102B300BEE9D5 /* InfoPlist.strings */; };
 		22DB66F0151102B300BEE9D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DB66EF151102B300BEE9D5 /* main.m */; };
@@ -21,6 +18,26 @@
 		22F27209160E809F006993AC /* Revolve-Icon-144px.png in Resources */ = {isa = PBXBuildFile; fileRef = 22F27205160E809F006993AC /* Revolve-Icon-144px.png */; };
 		22F2720A160E809F006993AC /* Revolve-Icon-57px.png in Resources */ = {isa = PBXBuildFile; fileRef = 22F27206160E809F006993AC /* Revolve-Icon-57px.png */; };
 		22F2720B160E809F006993AC /* Revolve-Icon-72px.png in Resources */ = {isa = PBXBuildFile; fileRef = 22F27207160E809F006993AC /* Revolve-Icon-72px.png */; };
+		E4A87DFE172CC06A00EA8F06 /* opentok.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E4A87DFD172CC06900EA8F06 /* opentok.bundle */; };
+		E4C385201783A53300914594 /* RoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E4C3851F1783A53300914594 /* RoomViewController.m */; };
+		E4F8485818144ECF00C0C1AC /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8484818144ECF00C0C1AC /* CoreTelephony.framework */; };
+		E4F8485918144ECF00C0C1AC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8484918144ECF00C0C1AC /* MobileCoreServices.framework */; };
+		E4F8485A18144ECF00C0C1AC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8484A18144ECF00C0C1AC /* CFNetwork.framework */; };
+		E4F8485B18144ECF00C0C1AC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8484B18144ECF00C0C1AC /* SystemConfiguration.framework */; };
+		E4F8485C18144ECF00C0C1AC /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8484C18144ECF00C0C1AC /* CoreMedia.framework */; };
+		E4F8485D18144ECF00C0C1AC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8484D18144ECF00C0C1AC /* Security.framework */; };
+		E4F8485E18144ECF00C0C1AC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8484E18144ECF00C0C1AC /* AudioToolbox.framework */; };
+		E4F8485F18144ECF00C0C1AC /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8484F18144ECF00C0C1AC /* CoreAudio.framework */; };
+		E4F8486018144ECF00C0C1AC /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8485018144ECF00C0C1AC /* CoreVideo.framework */; };
+		E4F8486118144ECF00C0C1AC /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8485118144ECF00C0C1AC /* OpenGLES.framework */; };
+		E4F8486218144ECF00C0C1AC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8485218144ECF00C0C1AC /* libz.dylib */; };
+		E4F8486318144ECF00C0C1AC /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8485318144ECF00C0C1AC /* libstdc++.dylib */; };
+		E4F8486418144ECF00C0C1AC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8485418144ECF00C0C1AC /* QuartzCore.framework */; };
+		E4F8486518144ECF00C0C1AC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8485518144ECF00C0C1AC /* AVFoundation.framework */; };
+		E4F8486618144ECF00C0C1AC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8485618144ECF00C0C1AC /* UIKit.framework */; };
+		E4F8486718144ECF00C0C1AC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8485718144ECF00C0C1AC /* CoreGraphics.framework */; };
+		E4F8486918144F0D00C0C1AC /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8486818144F0D00C0C1AC /* CoreBluetooth.framework */; };
+		E4F8486D18144F8700C0C1AC /* Opentok.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4F8486C18144F8700C0C1AC /* Opentok.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +46,6 @@
 		221CEA89160EACD70043B023 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2250D23E160C10240057CD21 /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		2250D23F160C10240057CD21 /* ScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanViewController.m; sourceTree = "<group>"; };
-		22B6EDC416CD988200FCFFC1 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
-		22B6EDC616CD989900FCFFC1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		22B6EDC816CD992700FCFFC1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		22DB66E2151102B300BEE9D5 /* KubiApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KubiApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22DB66ED151102B300BEE9D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22DB66EF151102B300BEE9D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -44,6 +58,44 @@
 		22F27205160E809F006993AC /* Revolve-Icon-144px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Revolve-Icon-144px.png"; sourceTree = "<group>"; };
 		22F27206160E809F006993AC /* Revolve-Icon-57px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Revolve-Icon-57px.png"; sourceTree = "<group>"; };
 		22F27207160E809F006993AC /* Revolve-Icon-72px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Revolve-Icon-72px.png"; sourceTree = "<group>"; };
+		E4A87DFD172CC06900EA8F06 /* opentok.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = opentok.bundle; sourceTree = "<group>"; };
+		E4A87E3C172CD7AB00EA8F06 /* PTEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTEventListener.h; sourceTree = "<group>"; };
+		E4A87E3D172CD7AB00EA8F06 /* PTJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTJSON.h; sourceTree = "<group>"; };
+		E4A87E3E172CD7AB00EA8F06 /* PTJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTJSONParser.h; sourceTree = "<group>"; };
+		E4A87E3F172CD7AB00EA8F06 /* PTPusher+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PTPusher+Testing.h"; sourceTree = "<group>"; };
+		E4A87E40172CD7AB00EA8F06 /* PTPusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusher.h; sourceTree = "<group>"; };
+		E4A87E41172CD7AB00EA8F06 /* PTPusherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherAPI.h; sourceTree = "<group>"; };
+		E4A87E42172CD7AB00EA8F06 /* PTPusherChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannel.h; sourceTree = "<group>"; };
+		E4A87E43172CD7AB00EA8F06 /* PTPusherConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherConnection.h; sourceTree = "<group>"; };
+		E4A87E44172CD7AB00EA8F06 /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherDelegate.h; sourceTree = "<group>"; };
+		E4A87E45172CD7AB00EA8F06 /* PTPusherErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherErrors.h; sourceTree = "<group>"; };
+		E4A87E46172CD7AB00EA8F06 /* PTPusherEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEvent.h; sourceTree = "<group>"; };
+		E4A87E47172CD7AB00EA8F06 /* PTPusherEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEventDispatcher.h; sourceTree = "<group>"; };
+		E4A87E48172CD7AB00EA8F06 /* PTPusherEventPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEventPublisher.h; sourceTree = "<group>"; };
+		E4A87E49172CD7AB00EA8F06 /* PTPusherMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherMacros.h; sourceTree = "<group>"; };
+		E4A87E4A172CD7AB00EA8F06 /* PTPusherMockConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherMockConnection.h; sourceTree = "<group>"; };
+		E4A87E4B172CD7AB00EA8F06 /* PTPusherPresenceChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherPresenceChannelDelegate.h; sourceTree = "<group>"; };
+		E4A87E4C172CD7AB00EA8F06 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		E4C3851E1783A53300914594 /* RoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoomViewController.h; sourceTree = "<group>"; };
+		E4C3851F1783A53300914594 /* RoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoomViewController.m; sourceTree = "<group>"; };
+		E4F8484818144ECF00C0C1AC /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8484918144ECF00C0C1AC /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8484A18144ECF00C0C1AC /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8484B18144ECF00C0C1AC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8484C18144ECF00C0C1AC /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8484D18144ECF00C0C1AC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8484E18144ECF00C0C1AC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8484F18144ECF00C0C1AC /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreAudio.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8485018144ECF00C0C1AC /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8485118144ECF00C0C1AC /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8485218144ECF00C0C1AC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
+		E4F8485318144ECF00C0C1AC /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/usr/lib/libstdc++.dylib"; sourceTree = DEVELOPER_DIR; };
+		E4F8485418144ECF00C0C1AC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8485518144ECF00C0C1AC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8485618144ECF00C0C1AC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8485718144ECF00C0C1AC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8486818144F0D00C0C1AC /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
+		E4F8486C18144F8700C0C1AC /* Opentok.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Opentok.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +103,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22B6EDC916CD992700FCFFC1 /* CoreGraphics.framework in Frameworks */,
-				22B6EDC716CD989900FCFFC1 /* UIKit.framework in Frameworks */,
-				22B6EDC516CD988200FCFFC1 /* CoreBluetooth.framework in Frameworks */,
+				E4F8486918144F0D00C0C1AC /* CoreBluetooth.framework in Frameworks */,
+				E4F8486D18144F8700C0C1AC /* Opentok.framework in Frameworks */,
+				E4F8486618144ECF00C0C1AC /* UIKit.framework in Frameworks */,
+				E4F8486418144ECF00C0C1AC /* QuartzCore.framework in Frameworks */,
 				22DB66E6151102B300BEE9D5 /* Foundation.framework in Frameworks */,
+				E4F8486518144ECF00C0C1AC /* AVFoundation.framework in Frameworks */,
+				E4F8485E18144ECF00C0C1AC /* AudioToolbox.framework in Frameworks */,
+				E4F8485B18144ECF00C0C1AC /* SystemConfiguration.framework in Frameworks */,
+				E4F8485818144ECF00C0C1AC /* CoreTelephony.framework in Frameworks */,
+				E4F8486718144ECF00C0C1AC /* CoreGraphics.framework in Frameworks */,
+				E4F8485D18144ECF00C0C1AC /* Security.framework in Frameworks */,
+				E4F8485F18144ECF00C0C1AC /* CoreAudio.framework in Frameworks */,
+				E4F8486118144ECF00C0C1AC /* OpenGLES.framework in Frameworks */,
+				E4F8485A18144ECF00C0C1AC /* CFNetwork.framework in Frameworks */,
+				E4F8486318144ECF00C0C1AC /* libstdc++.dylib in Frameworks */,
+				E4F8485C18144ECF00C0C1AC /* CoreMedia.framework in Frameworks */,
+				E4F8485918144ECF00C0C1AC /* MobileCoreServices.framework in Frameworks */,
+				E4F8486218144ECF00C0C1AC /* libz.dylib in Frameworks */,
+				E4F8486018144ECF00C0C1AC /* CoreVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,11 +131,15 @@
 		22DB66E9151102B300BEE9D5 /* KubiApp */ = {
 			isa = PBXGroup;
 			children = (
+				E4A87E3B172CD7AB00EA8F06 /* headers */,
+				E4A87DFD172CC06900EA8F06 /* opentok.bundle */,
 				22DC187815040EC800AD0CBF /* Info.plist */,
 				22DB66EC151102B300BEE9D5 /* InfoPlist.strings */,
 				22DB66F1151102B300BEE9D5 /* Prefix.pch */,
 				22DB66F2151102B300BEE9D5 /* AppDelegate.h */,
 				22DB66F3151102B300BEE9D5 /* AppDelegate.m */,
+				E4C3851E1783A53300914594 /* RoomViewController.h */,
+				E4C3851F1783A53300914594 /* RoomViewController.m */,
 				2250D23E160C10240057CD21 /* ScanViewController.h */,
 				2250D23F160C10240057CD21 /* ScanViewController.m */,
 				220B2DC415DC446E006F8E44 /* ServiceViewController.h */,
@@ -103,12 +174,51 @@
 		22EED42B14F854C300D83F04 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				22B6EDC816CD992700FCFFC1 /* CoreGraphics.framework */,
-				22B6EDC616CD989900FCFFC1 /* UIKit.framework */,
-				22B6EDC416CD988200FCFFC1 /* CoreBluetooth.framework */,
+				E4F8486C18144F8700C0C1AC /* Opentok.framework */,
+				E4F8486818144F0D00C0C1AC /* CoreBluetooth.framework */,
+				E4F8484818144ECF00C0C1AC /* CoreTelephony.framework */,
+				E4F8484918144ECF00C0C1AC /* MobileCoreServices.framework */,
+				E4F8484A18144ECF00C0C1AC /* CFNetwork.framework */,
+				E4F8484B18144ECF00C0C1AC /* SystemConfiguration.framework */,
+				E4F8484C18144ECF00C0C1AC /* CoreMedia.framework */,
+				E4F8484D18144ECF00C0C1AC /* Security.framework */,
+				E4F8484E18144ECF00C0C1AC /* AudioToolbox.framework */,
+				E4F8484F18144ECF00C0C1AC /* CoreAudio.framework */,
+				E4F8485018144ECF00C0C1AC /* CoreVideo.framework */,
+				E4F8485118144ECF00C0C1AC /* OpenGLES.framework */,
+				E4F8485218144ECF00C0C1AC /* libz.dylib */,
+				E4F8485318144ECF00C0C1AC /* libstdc++.dylib */,
+				E4F8485418144ECF00C0C1AC /* QuartzCore.framework */,
+				E4F8485518144ECF00C0C1AC /* AVFoundation.framework */,
+				E4F8485618144ECF00C0C1AC /* UIKit.framework */,
+				E4F8485718144ECF00C0C1AC /* CoreGraphics.framework */,
 				22EED42C14F854C300D83F04 /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4A87E3B172CD7AB00EA8F06 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				E4A87E3C172CD7AB00EA8F06 /* PTEventListener.h */,
+				E4A87E3D172CD7AB00EA8F06 /* PTJSON.h */,
+				E4A87E3E172CD7AB00EA8F06 /* PTJSONParser.h */,
+				E4A87E3F172CD7AB00EA8F06 /* PTPusher+Testing.h */,
+				E4A87E40172CD7AB00EA8F06 /* PTPusher.h */,
+				E4A87E41172CD7AB00EA8F06 /* PTPusherAPI.h */,
+				E4A87E42172CD7AB00EA8F06 /* PTPusherChannel.h */,
+				E4A87E43172CD7AB00EA8F06 /* PTPusherConnection.h */,
+				E4A87E44172CD7AB00EA8F06 /* PTPusherDelegate.h */,
+				E4A87E45172CD7AB00EA8F06 /* PTPusherErrors.h */,
+				E4A87E46172CD7AB00EA8F06 /* PTPusherEvent.h */,
+				E4A87E47172CD7AB00EA8F06 /* PTPusherEventDispatcher.h */,
+				E4A87E48172CD7AB00EA8F06 /* PTPusherEventPublisher.h */,
+				E4A87E49172CD7AB00EA8F06 /* PTPusherMacros.h */,
+				E4A87E4A172CD7AB00EA8F06 /* PTPusherMockConnection.h */,
+				E4A87E4B172CD7AB00EA8F06 /* PTPusherPresenceChannelDelegate.h */,
+				E4A87E4C172CD7AB00EA8F06 /* SRWebSocket.h */,
+			);
+			path = headers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +249,11 @@
 			attributes = {
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Revolve Robotics Inc.";
+				TargetAttributes = {
+					22DB66E1151102B300BEE9D5 = {
+						DevelopmentTeam = Q8LHUPHAD8;
+					};
+				};
 			};
 			buildConfigurationList = 22EED42214F854C300D83F04 /* Build configuration list for PBXProject "KubiApp" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -168,6 +283,7 @@
 				22F2720A160E809F006993AC /* Revolve-Icon-57px.png in Resources */,
 				22F2720B160E809F006993AC /* Revolve-Icon-72px.png in Resources */,
 				221CEA8A160EACD70043B023 /* Default-568h@2x.png in Resources */,
+				E4A87DFE172CC06A00EA8F06 /* opentok.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +298,7 @@
 				22DB66F4151102B300BEE9D5 /* AppDelegate.m in Sources */,
 				220B2DC615DC446E006F8E44 /* ServiceViewController.m in Sources */,
 				2250D240160C10240057CD21 /* ScanViewController.m in Sources */,
+				E4C385201783A53300914594 /* RoomViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,20 +321,31 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\"",
+					"\\\"$(SRCROOT)/../../opentok-ios-sdk-webrtc\\\"",
+					"$(SRCROOT)",
+					"\\\"$(SRCROOT)/opentok-ios-sdk-webrtc\\\"",
+					"/Users/song/CloudStorage/Dropbox/Development/2013/dev-community/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = KubiApp/Prefix.pch;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = KubiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -226,23 +354,34 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+					"\\\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\\\"",
+					"\\\"$(SRCROOT)/../../opentok-ios-sdk-webrtc\\\"",
+					"$(SRCROOT)",
+					"\\\"$(SRCROOT)/opentok-ios-sdk-webrtc\\\"",
+					"/Users/song/CloudStorage/Dropbox/Development/2013/dev-community/iOS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = KubiApp/Prefix.pch;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = KubiApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -274,7 +413,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -300,6 +440,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = "";
 				SDKROOT = macosx;
 			};
 			name = Release;
